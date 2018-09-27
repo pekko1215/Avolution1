@@ -1,7 +1,8 @@
-var gulp = require("gulp");
-var plumber = require("gulp-plumber");
-var browserSync = require("browser-sync");
-var notify = require("gulp-notify");
+const gulp = require("gulp");
+const plumber = require("gulp-plumber");
+const browserSync = require("browser-sync");
+const notify = require("gulp-notify");
+const plumber = require('gulp-plumber');
 
 gulp.task('default', ['browser-sync']);
 
@@ -18,6 +19,17 @@ gulp.task('browser-sync', () => {
     gulp.watch("./*.html", ['reload']);
 });
 
+//ES6変換&bundle
+gulp.task("bundle",()=>{
+	return gulp.src([
+			"./slot/**/*.js"
+		])
+		.pipe(plumber())
+		.pipe(webpack({
+			entry:"./slot/main.js",
+			
+		}))
+})
 
 //ブラウザリロード処理
 gulp.task('reload', () => {
